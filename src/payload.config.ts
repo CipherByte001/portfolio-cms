@@ -18,6 +18,9 @@ const allowedOrigins = [
   'http://127.0.0.1:3001',
   'http://127.0.0.1:5173',
   'https://portfolio-cms-rpmi.onrender.com',
+  'https://eitmamomarsanam.vercel.app',
+  'https://eitmamomarsana.vercel.app',
+  'https://portfolio-lyart-one-79.vercel.app',
   ...(process.env.CORS_ORIGIN || '').split(',').map((o) => o.trim()).filter(Boolean),
 ];
 
@@ -49,7 +52,7 @@ export default buildConfig({
   globals: [About, Resume],
 
   // ── CORS / CSRF ───────────────────────────────────────────────────────
-  cors: allowedOrigins,
+  cors: '*',
   csrf: allowedOrigins,
 
   // ── Media ─────────────────────────────────────────────────────────────
