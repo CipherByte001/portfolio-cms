@@ -13,26 +13,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// CORS — allow local ports and production origins
-const allowedOrigins = [
-  'http://localhost:3001',
-  'http://localhost:5173',
-  'http://127.0.0.1:3001',
-  'http://127.0.0.1:5173',
-  ...(process.env.CORS_ORIGIN || '').split(',').map((o) => o.trim()).filter(Boolean),
-];
-
+// Allow all origins or specified ones (production friendly)
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. same-origin, curl, server-side) and allowed origins
-      if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
-      // Fallback: allow localhost regardless of port
-      if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
-        return callback(null, true);
-      }
-      callback(new Error(`CORS blocked: ${origin}`));
-    },
+    origin: true,
     credentials: true,
   })
 );
@@ -51,8 +35,8 @@ const start = async () => {
   });
 
   app.listen(PORT, () => {
-    console.log(`🚀 CMS server running on http://localhost:${PORT}`);
-    console.log(`🔑 Admin panel: http://localhost:${PORT}/admin`);
+    console.log(`🚀 CMS server running on port ${PORT}`);
+    console.log(`🔑 Admin panel ready`);
   });
 };
 
