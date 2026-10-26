@@ -17,10 +17,14 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:3001',
   'http://127.0.0.1:5173',
+  'https://portfolio-cms-rpmi.onrender.com',
   ...(process.env.CORS_ORIGIN || '').split(',').map((o) => o.trim()).filter(Boolean),
 ];
 
 export default buildConfig({
+  // ── Production Server URL for Cookies & CSRF ──────────────────────────
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'https://portfolio-cms-rpmi.onrender.com',
+
   // ── Admin UI ─────────────────────────────────────────────────────────
   admin: {
     user: Users.slug,
